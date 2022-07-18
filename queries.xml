@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+	<bean id="queries" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="company_findall">
+					<value> 
+					<![CDATA[select * from public.company ]]>
+					</value>
+				</entry>
+				<entry key="company_findbyid">
+					<value> 
+					<![CDATA[select * from public.company where id= :id ]]>
+					</value>
+				</entry>
+
+				<entry key="financial_info_find_all">
+					<value> 
+					<![CDATA[select fi.institution_name as nameofmfi,b.branch_name as dateofbranchOpening,
+                        b.branch_location  as branchchlocation, mv.clients as clientoutreach,
+                        mv.reasons as keyreasonsfordefault,
+                        od.pos as pos, od.par as par
+                        from financial_info f
+                        inner join financial_info fi on fi.finformation_id = f.info_id
+                        inner join branch_premise b on b.branch_premise_id = f.info_id
+                        inner join major_villages mv on mv.mpar_id = f.info_id
+                        inner join operational_details od  on od.details_id = f.info_id  ]]>
+					</value>
+				</entry>
+
+
+
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>
